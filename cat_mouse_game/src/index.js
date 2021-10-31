@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import { HashRouter } from 'react-router-dom';
 
 function Token(props) {
   return (
@@ -203,8 +202,6 @@ class CatMouseGame extends React.Component {
 // ========================================
 
 ReactDOM.render(
-  <HashRouter basename={ProcessingInstruction.env.PUBLIC_URL}>
-    <CatMouseGame />
-  </HashRouter>,
+  <CatMouseGame />,
   document.getElementById('root')
 );
