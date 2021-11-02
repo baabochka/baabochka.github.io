@@ -62,7 +62,11 @@ class Board extends React.Component {
 
   handleCardClick = () => {
     console.log("CHANGING CARD");
-    const nextCardNumber = this.state.cardNumber+1;
+    let nextCardNumber = this.state.cardNumber+1;
+    if (nextCardNumber === this.props.deck.length) {
+      nextCardNumber = 0;
+      this.props.shuffleDeck();
+    }
     this.setState({showAnswer: false, cardNumber: nextCardNumber, answerSelected: false});
     const overlays = document.getElementsByClassName('active-overlay');
     [...overlays].forEach((el) => el.classList.remove('active-overlay'));
@@ -178,6 +182,10 @@ class CatMouseGame extends React.Component {
     }
   }
 
+  shuffleDeck() {
+    this.setState({deck: getShuffledDeck()})
+  }
+
   updateScore() {
     console.log("Updating score");
     let newScore = this.state.score + 1;
@@ -192,6 +200,7 @@ class CatMouseGame extends React.Component {
             deck={this.state.deck}
             updateScore={() => this.updateScore()}
             score={this.state.score}
+            shuffleDeck={()=> this.shuffleDeck()}
           />
         </div>
       </div>
